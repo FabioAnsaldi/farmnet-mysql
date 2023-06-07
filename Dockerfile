@@ -6,7 +6,7 @@ COPY config/user.cnf /etc/mysql/my.cnf
 
 RUN mkdir -p /var/lib/mysql/backups
 
-CMD sleep 5 \
+CMD sleep 5 && \
     mysqldump -u root --password="$MYSQL_ROOT_PASSWORD" \
     --single-transaction \
     --result-file=/var/lib/mysql/backups/backup.$(date +%F.%T).sql \
