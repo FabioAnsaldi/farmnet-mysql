@@ -6,7 +6,7 @@ COPY config/user.cnf /etc/mysql/my.cnf
 
 RUN mkdir -p /var/lib/mysql/backups
 
-HEALTHCHECK --interval=5m --timeout=3s --start-period=1s \
+HEALTHCHECK --timeout=7s --interval=5s --start-period=3s --retries=5 \
   CMD mysqldump -u root --password="$MYSQL_ROOT_PASSWORD" \
       --single-transaction \
       --result-file=/var/lib/mysql/backups/backup.$(date +%F.%T).sql \
