@@ -6,8 +6,10 @@ COPY config/user.cnf /etc/mysql/my.cnf
 
 RUN mkdir -p /var/lib/mysql/backups
 
+HEALTHCHECK --interval=5m --timeout=3s --start-period=1s \
+  CMD mysqladmin -u root ping --password="$MYSQL_ROOT_PASSWORD" -h localhost || exit 1
+
 CMD mysqldump -u root --password="$MYSQL_ROOT_PASSWORD" \
     --single-transaction \
     --result-file=/var/lib/mysql/backups/backup.$(date +%F.%T).sql \
-    --all-databases \
-    && exit 0
+    --all-databases
