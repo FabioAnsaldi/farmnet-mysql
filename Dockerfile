@@ -10,4 +10,4 @@ CMD mysqldump -u root --password="$MYSQL_ROOT_PASSWORD" \
     --single-transaction \
     --result-file=/var/lib/mysql/backups/backup.$(date +%F.%T).sql \
     --all-databases \
-    &>/dev/null
+    && exit 0
